@@ -2,206 +2,176 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Select, Card, message, Row, Col } from 'antd';
 import './Registro.css';
 
+// Opciones predefinidas
+const ROLES = ['Administrador', 'Usuario de Planilla'];
+const TIPOS_SALARIO = ['Mensual', 'Por Hora'];
+const MEDIOS_PAGO = ['Banco', 'Transferencia Internacional', 'Plataforma Internacional'];
+
 const { Option } = Select;
 
-function Registro() {
+const Registro = () => {
   const [loading, setLoading] = useState(false);
 
-  const onFinish = (values) => {
+  const handleFinish = (values) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       message.success('Registro exitoso!');
-      console.log('Valores enviados:', values); // Aquí puedes ver todos los datos enviados
+      console.log('Valores enviados:', values);
     }, 1000);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    message.error('Por favor, completa todos los campos requeridos!');
-    console.log('Errores:', errorInfo);
+  const handleFinishFailed = ({ errorFields }) => {
+    errorFields.forEach(({ name, errors }) => {
+      message.error(`Error en el campo "${name}": ${errors[0]}`);
+    });
   };
+
+  // Componente reutilizable para Inputs
+  const CustomInput = ({ name, label, rules, placeholder, type = 'text' }) => (
+    <Form.Item name={name} label={label} rules={rules}>
+      <Input type={type} placeholder={placeholder} aria-label={label} aria-required="true" />
+    </Form.Item>
+  );
+
+  // Componente reutilizable para Selects
+  const CustomSelect = ({ name, label, rules, placeholder, options }) => (
+    <Form.Item name={name} label={label} rules={rules}>
+      <Select placeholder={placeholder} aria-label={label} aria-required="true">
+        {options.map((option) => (
+          <Option key={option} value={option}>
+            {option}
+          </Option>
+        ))}
+      </Select>
+    </Form.Item>
+  );
 
   return (
     <div className="registro-container">
-      <Card
-        title={<h1> Registrar Usuario</h1>}
-        bordered={false}
-        className="registro-card"
-      >
+      <Card title={<h1>Registrar Usuario</h1>} bordered={false} className="registro-card">
         <Form
           name="registro"
           initialValues={{
-            tipoSalario: 'Mensual', // Valor inicial para Tipo de Salario
-            medioPago: 'Banco', // Valor inicial para Medio de Pago
-            rol: 'Usuario de Planilla', // Valor inicial para Rol
+            tipoSalario: 'Mensual',
+            medioPago: 'Banco',
+            rol: 'Usuario de Planilla',
           }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleFinish}
+          onFinishFailed={handleFinishFailed}
           size="large"
           layout="vertical"
         >
           <Row gutter={24}>
-            {/* Nombre */}
+            {/* Campos del formulario */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="nombre"
                 label="Nombre"
-                rules={[{ required: true, message: 'Por favor, ingresa tu nombre!' }]}
-              >
-                <Input placeholder="Nombre" />
-              </Form.Item>
+                rules={[
+                  { required: true, message: 'Por favor, ingresa tu nombre!' },
+                  { whitespace: true, message: 'Este campo no puede estar vacío!' },
+                ]}
+                placeholder="Nombre"
+              />
             </Col>
 
-            {/* Apellido */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="apellido"
                 label="Apellido"
-                rules={[{ required: true, message: 'Por favor, ingresa tu apellido!' }]}
-              >
-                <Input placeholder="Apellido" />
-              </Form.Item>
+                rules={[
+                  { required: true, message: 'Por favor, ingresa tu apellido!' },
+                  { whitespace: true, message: 'Este campo no puede estar vacío!' },
+                ]}
+                placeholder="Apellido"
+              />
             </Col>
 
-            {/* Código de Empleado */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="codigoEmpleado"
                 label="Código de Empleado"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Por favor, ingresa un código único!',
-                  },
-                ]}
-              >
-                <Input placeholder="Código de Empleado" />
-              </Form.Item>
+                rules={[{ required: true, message: 'Por favor, ingresa un código único!' }]}
+                placeholder="Código de Empleado"
+              />
             </Col>
 
-            {/* Edad */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="edad"
                 label="Edad"
                 rules={[
-                  {
-                    required: true,
-                    message: 'Por favor, ingresa tu edad!',
-                  },
-                  {
-                    type: 'number',
-                    min: 18,
-                    max: 65,
-                    message: 'La edad debe estar entre 18 y 65 años!',
-                    transform: (value) => Number(value),
-                  },
+                  { required: true, message: 'Por favor, ingresa tu edad!' },
+                  { type: 'number', min: 18, max: 65, message: 'La edad debe estar entre 18 y 65 años!', transform: (value) => Number(value) },
                 ]}
-              >
-                <Input type="number" placeholder="Edad (18-65)" />
-              </Form.Item>
+                placeholder="Edad (18-65)"
+                type="number"
+              />
             </Col>
 
-            {/* Dirección */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="direccion"
                 label="Dirección"
                 rules={[{ required: true, message: 'Por favor, ingresa tu dirección!' }]}
-              >
-                <Input placeholder="Dirección" />
-              </Form.Item>
+                placeholder="Dirección"
+              />
             </Col>
 
-            {/* Rol */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomSelect
                 name="rol"
                 label="Rol"
                 rules={[{ required: true, message: 'Por favor, selecciona un rol!' }]}
-              >
-                <Select placeholder="Selecciona un rol">
-                  <Option value="Administrador">Administrador</Option>
-                  <Option value="Usuario de Planilla">Usuario de Planilla</Option>
-                </Select>
-              </Form.Item>
+                placeholder="Selecciona un rol"
+                options={ROLES}
+              />
             </Col>
 
-            {/* Correo Electrónico Personal */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="correoPersonal"
                 label="Correo Electrónico Personal"
                 rules={[
-                  {
-                    required: true,
-                    type: 'email',
-                    message: 'Por favor, ingresa un correo personal válido!',
-                  },
+                  { required: true, type: 'email', message: 'Por favor, ingresa un correo personal válido!' },
                 ]}
-              >
-                <Input placeholder="Correo Electrónico Personal" />
-              </Form.Item>
+                placeholder="Correo Electrónico Personal"
+              />
             </Col>
 
-            {/* Correo Electrónico Empresarial */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomInput
                 name="correoEmpresarial"
                 label="Correo Electrónico Empresarial"
-                rules={[
-                  {
-                    type: 'email',
-                    message: 'Por favor, ingresa un correo empresarial válido!',
-                  },
-                ]}
-              >
-                <Input placeholder="Correo Electrónico Empresarial (opcional)" />
-              </Form.Item>
+                rules={[{ type: 'email', message: 'Por favor, ingresa un correo empresarial válido!' }]}
+                placeholder="Correo Electrónico Empresarial (opcional)"
+              />
             </Col>
 
-            {/* Tipo de Salario */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomSelect
                 name="tipoSalario"
                 label="Tipo de Salario"
                 rules={[{ required: true, message: 'Por favor, selecciona un tipo de salario!' }]}
-              >
-                <Select placeholder="Selecciona">
-                  <Option value="Mensual">Mensual</Option>
-                  <Option value="Por Hora">Por Hora</Option>
-                </Select>
-              </Form.Item>
+                placeholder="Selecciona"
+                options={TIPOS_SALARIO}
+              />
             </Col>
 
-            {/* Medio de Pago */}
             <Col xs={24} sm={12}>
-              <Form.Item
+              <CustomSelect
                 name="medioPago"
                 label="Medio de Pago"
                 rules={[{ required: true, message: 'Por favor, selecciona un medio de pago!' }]}
-              >
-                <Select placeholder="Selecciona">
-                  <Option value="Banco">Banco</Option>
-                  <Option value="Transferencia Internacional">
-                    Transferencia Internacional
-                  </Option>
-                  <Option value="Plataforma Internacional">
-                    Plataforma Internacional
-                  </Option>
-                </Select>
-              </Form.Item>
+                placeholder="Selecciona"
+                options={MEDIOS_PAGO}
+              />
             </Col>
           </Row>
 
-          {/* Botón de Submit */}
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              className="registro-button"
-            >
+            <Button type="primary" htmlType="submit" loading={loading} className="registro-button">
               Registrar
             </Button>
           </Form.Item>
@@ -209,6 +179,6 @@ function Registro() {
       </Card>
     </div>
   );
-}
+};
 
 export default Registro;
