@@ -1,0 +1,30 @@
+.reporte-pago-container {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f6f8;
+  }
+  
+  .reporte-pago-card {
+    width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reporte-pago-title {
+    color: #1890ff;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .reporte-pago-text {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .reporte-pago-text strong {
+    font-weight: bold;
+  }
+  

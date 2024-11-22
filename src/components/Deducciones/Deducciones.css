@@ -1,0 +1,14 @@
+.deducciones-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .deducciones-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .deducciones-container .ant-table {
+    margin-top: 20px;
+  }
+  

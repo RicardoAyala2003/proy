@@ -1,0 +1,14 @@
+.ingreso-horas-container {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+  }
+  
+  .ingreso-horas-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .ingreso-horas-container .ant-table {
+    margin-top: 20px;
+  }
+  

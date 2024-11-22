@@ -6,11 +6,17 @@ import {
   SettingOutlined,
   ScheduleOutlined,
   CalculatorOutlined,
+  FileTextOutlined, // Icono para Reporte y Pago
   PoweroffOutlined,
 } from '@ant-design/icons';
 import { Navigate } from 'react-router-dom';
-import CommonTable from '../CommonTable/CommonTable'; // Importamos el componente CommonTable
-import Registro from '../Registro/Registro'; // Importamos Registro
+import CommonTable from '../CommonTable/CommonTable'; // Componente existente
+import Registro from '../Registro/Registro'; // Componente existente
+import Deducciones from '../Deducciones/Deducciones'; // Componente existente
+import IngresoHoras from '../IngresoHoras/IngresoHoras'; // Componente existente
+import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente existente
+import ListaPlanillas from '../ListaPlanillas/ListaPlanillas'; // Nuevo componente
+import ReportePago from '../ReportePago/ReportePago'; // Componente único para Reporte y Pago
 import './SideMenu.css';
 
 const { Sider, Content } = Layout;
@@ -18,11 +24,9 @@ const { SubMenu } = Menu;
 
 const SideMenu = () => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
-  const [selectedKey, setSelectedKey] = useState(''); // Para controlar la selección
+  const [selectedKey, setSelectedKey] = useState('');
 
   const handleMenuClick = (menuKey) => {
-    console.log('Opción seleccionada:', menuKey);
-
     if (menuKey === 'logout') {
       setIsLoggedOut(true);
     } else {
@@ -37,11 +41,21 @@ const SideMenu = () => {
   const renderContent = () => {
     switch (selectedKey) {
       case 'crear-usuarios':
-        return <Registro />; // Mostrar Registro para "Crear Usuarios"
+        return <Registro />;
       case 'gestionar-usuarios':
-        return <CommonTable />; // Mostrar CommonTable para "Gestionar Usuarios"
+        return <CommonTable />;
       case 'gestion-empleados':
-        return <CommonTable />; // Reutilizamos CommonTable para "Gestión de Empleados"
+        return <CommonTable />;
+      case 'deducciones':
+        return <Deducciones />;
+      case 'ingreso-horas':
+        return <IngresoHoras />;
+      case 'ciclo-planillas':
+        return <CicloPlanillas />;
+      case 'lista-planillas':
+        return <ListaPlanillas />;
+      case 'reporte-pago': // Nueva opción única
+        return <ReportePago />; // Componente único para Reporte y Pago
       default:
         return (
           <div>
@@ -54,10 +68,9 @@ const SideMenu = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      {/* Menú lateral */}
       <Sider collapsible className="side-menu">
         <div className="logo">
-          <h1 style={{ color: 'white', textAlign: 'center', padding: '10px' }}>Mi App</h1>
+          <h1 style={{ color: 'white', textAlign: 'center', padding: '10px' }}>Menú</h1>
         </div>
         <Menu
           theme="dark"
@@ -72,24 +85,25 @@ const SideMenu = () => {
           <Menu.Item key="gestion-empleados" icon={<TeamOutlined />}>
             Gestión de Empleados
           </Menu.Item>
-          <Menu.Item key="3" icon={<SettingOutlined />}>
-            Configuración de Deducciones
+          <Menu.Item key="deducciones" icon={<SettingOutlined />}>
+            Deducciones
           </Menu.Item>
-          <Menu.Item key="4" icon={<ScheduleOutlined />}>
-            Ciclo de Planillas
+          <Menu.Item key="ingreso-horas" icon={<ScheduleOutlined />}>
+            Ingreso de Horas
           </Menu.Item>
-          <Menu.Item key="5" icon={<CalculatorOutlined />}>
-            Cálculo Salarial
+          <SubMenu key="planillas" icon={<CalculatorOutlined />} title="Planillas">
+            <Menu.Item key="ciclo-planillas">Ciclo de Planillas</Menu.Item>
+            <Menu.Item key="lista-planillas">Lista de Planillas</Menu.Item>
+          </SubMenu>
+          <Menu.Item key="reporte-pago" icon={<FileTextOutlined />}>
+            Reporte y Pago
           </Menu.Item>
-
-          {/* Opción de Cerrar sesión */}
           <Menu.Item key="logout" icon={<PoweroffOutlined />}>
             Cerrar Sesión
           </Menu.Item>
         </Menu>
       </Sider>
 
-      {/* Contenido principal */}
       <Content
         style={{
           margin: '16px',

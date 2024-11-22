@@ -1,0 +1,40 @@
+.ciclo-planillas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajusta la altura al 100% del viewport */
+  background-color: #f4f6f8;
+  padding: 20px; /* Agrega un poco de espacio alrededor */
+}
+
+.ciclo-planillas-card {
+  width: 600px; /* Hacemos el formulario más ancho */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Un poco más de sombra */
+  background-color: #fff; /* Fondo blanco */
+}
+
+.ciclo-planillas-card h2 {
+  text-align: center;
+  color: #1890ff;
+  font-size: 1.8rem; /* Tamaño más grande */
+  margin-bottom: 20px;
+}
+
+.ant-form-item-label > label {
+  font-weight: 500;
+  color: #595959;
+}
+
+.ant-btn-primary {
+  font-size: 16px;
+  height: 48px; /* Botón más grande */
+  border-radius: 8px;
+}
+
+.ant-input,
+.ant-select-selector {
+  height: 40px;
+  font-size: 16px;
+}
