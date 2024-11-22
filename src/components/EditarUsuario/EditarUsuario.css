@@ -1,0 +1,83 @@
+/* Contenedor general del formulario de edición */
+.editar-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Fondo azul oscuro */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Tarjeta del formulario */
+.editar-card {
+    width: 100%;
+    max-width: 900px; /* Ancho máximo para la tarjeta */
+    padding: 40px 30px;
+    border-radius: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra */
+    text-align: center;
+    color: #333;
+}
+
+/* Título del formulario de edición */
+.editar-card h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2a5298; /* Azul oscuro */
+}
+
+/* Botón de edición */
+.editar-button {
+    width: 100%;
+    background: linear-gradient(90deg, #f093fb, #f5576c); /* Gradiente */
+    border: none;
+    height: 55px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.editar-button:hover {
+    background: linear-gradient(90deg, #f5576c, #f093fb); /* Gradiente inverso */
+    transform: scale(1.05); /* Zoom al pasar el cursor */
+}
+
+/* Inputs y Select */
+.ant-input,
+.ant-input-password,
+.ant-select-selector {
+    border-radius: 10px;
+    height: 50px;
+    font-size: 16px;
+}
+
+.ant-input::placeholder,
+.ant-input-password::placeholder {
+    color: #aaa;
+}
+
+.ant-select-selector {
+    display: flex;
+    align-items: center;
+}
+
+.ant-form-item {
+    margin-bottom: 20px; /* Separación entre campos */
+}
+
+/* Estilo para el formulario en pantallas pequeñas */
+@media (max-width: 768px) {
+    .editar-card {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .editar-button {
+        font-size: 16px;
+        height: 50px;
+    }
+}

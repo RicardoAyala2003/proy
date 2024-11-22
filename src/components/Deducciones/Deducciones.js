@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal, Form, Input, Select, message } from 'antd';
+import { Table, Button, message } from 'antd';
 import './Deducciones.css';
-
-const { Option } = Select;
+import AgregarDeducciones from './AgregarDeducciones'; // Importamos el componente de AgregarDeducciones
 
 const Deducciones = () => {
   const [deducciones, setDeducciones] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
 
+  // Función para mostrar el modal
   const showModal = () => {
     setIsModalVisible(true);
   };
 
+  // Función para cerrar el modal
   const handleCancel = () => {
     setIsModalVisible(false);
-    form.resetFields();
   };
 
+  // Función para agregar una nueva deducción
   const handleAddDeduccion = (values) => {
     const nuevaDeduccion = {
       key: deducciones.length + 1,
@@ -27,8 +27,7 @@ const Deducciones = () => {
     };
 
     setDeducciones([...deducciones, nuevaDeduccion]);
-    setIsModalVisible(false);
-    form.resetFields();
+    setIsModalVisible(false); // Cierra el modal después de agregar
     message.success('Deducción agregada exitosamente.');
   };
 
@@ -56,6 +55,7 @@ const Deducciones = () => {
       <Button type="primary" onClick={showModal}>
         Agregar Deducción
       </Button>
+
       <Table
         style={{ marginTop: '20px' }}
         dataSource={deducciones}
@@ -63,47 +63,12 @@ const Deducciones = () => {
         pagination={{ pageSize: 5 }}
       />
 
-      <Modal
-        title="Agregar Nueva Deducción"
+      {/* Aquí usamos el componente AgregarDeducciones */}
+      <AgregarDeducciones 
         visible={isModalVisible}
         onCancel={handleCancel}
-        footer={null}
-      >
-        <Form form={form} layout="vertical" onFinish={handleAddDeduccion}>
-          <Form.Item
-            name="nombre"
-            label="Nombre de la Deducción"
-            rules={[{ required: true, message: 'Por favor, ingrese el nombre.' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="frecuencia"
-            label="Frecuencia"
-            rules={[{ required: true, message: 'Por favor, seleccione la frecuencia.' }]}
-          >
-            <Select placeholder="Seleccione una frecuencia">
-              <Option value="Mensual">Mensual</Option>
-              <Option value="Quincenal">Quincenal</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="monto"
-            label="Monto"
-            rules={[
-              { required: true, message: 'Por favor, ingrese el monto.' },
-              { pattern: /^[0-9]+$/, message: 'Solo se permiten números.' },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Guardar
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+        onAddDeduccion={handleAddDeduccion}
+      />
     </div>
   );
 };

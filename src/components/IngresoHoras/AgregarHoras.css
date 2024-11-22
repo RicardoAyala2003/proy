@@ -1,0 +1,52 @@
+/* Estilo del modal */
+.agregar-horas-modal .ant-modal-content {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  }
+  
+  .agregar-horas-modal .ant-modal-header {
+    color: #3f8cfc;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 20px;
+  }
+  
+  .agregar-horas-modal .ant-modal-body {
+    padding: 30px;
+  }
+  
+  .agregar-horas-modal .ant-form-item-label {
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .agregar-horas-button {
+    background-color: #3f8cfc;
+    border-color: #3f8cfc;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .agregar-horas-button:hover {
+    background-color: #2b71c4;
+    border-color: #2b71c4;
+  }
+  
+  .agregar-horas-button:focus {
+    outline: none;
+  }
+  
+  /* Estilo para los inputs */
+  .agregar-horas-modal .ant-input-number {
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .agregar-horas-modal .ant-input {
+    font-size: 16px;
+  }
+  

@@ -1,8 +1,12 @@
-import React from 'react';
-import { Table, Button, Space } from 'antd';
+import React, { useState } from 'react';
+import { Table, Button, Space, Modal } from 'antd';
+import EditarUsuario from '../EditarUsuario/EditarUsuario'; // Importar el componente de editar usuario
 import './CommonTable.css'; // Estilos con los colores azules
 
 const CommonTable = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
   const columns = [
     {
       title: 'Nombre',
@@ -39,14 +43,14 @@ const CommonTable = () => {
       key: 'acciones',
       render: (_, record) => (
         <Space size="middle">
-          <Button 
-            className="ant-btn-edit" 
-            onClick={() => handleEdit(record.key)}
+          <Button
+            className="ant-btn-edit"
+            onClick={() => handleEdit(record)}
           >
             Editar
           </Button>
-          <Button 
-            className="ant-btn-delete" 
+          <Button
+            className="ant-btn-delete"
             onClick={() => handleDelete(record.key)}
           >
             Eliminar
@@ -86,17 +90,36 @@ const CommonTable = () => {
     },
   ];
 
-  const handleEdit = (key) => {
-    console.log('Editar usuario con código:', key);
+  const handleEdit = (user) => {
+    setCurrentUser(user);  // Asignar el usuario seleccionado
+    setIsModalVisible(true);  // Mostrar el Modal con el formulario de edición
   };
 
   const handleDelete = (key) => {
     console.log('Eliminar usuario con código:', key);
   };
 
+  const handleCancel = () => {
+    setIsModalVisible(false);  // Cerrar el Modal
+    setCurrentUser(null);  // Limpiar los datos del usuario
+  };
+
   return (
     <div className="table-container">
       <Table columns={columns} dataSource={data} pagination={false} />
+
+      {/* Modal para editar usuario */}
+      <Modal
+        title="Editar Usuario"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}  // No mostrar los botones predeterminados
+        width={800}
+      >
+        {currentUser && (
+          <EditarUsuario usuarioData={currentUser} />  // Pasar los datos del usuario actual
+        )}
+      </Modal>
     </div>
   );
 };

@@ -1,0 +1,66 @@
+/* Estilo general para el modal */
+.deducciones-modal .ant-modal-content {
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .deducciones-modal .ant-modal-header {
+    color: #3f8cfc; /* Color azul para el texto */
+    font-size: 22px; /* Hacer el título más grande */
+    font-weight: bold;
+    padding: 20px 20px 10px 20px; /* Más espacio para el título */
+  }
+  
+  .deducciones-form .ant-form-item-label {
+    color: #333; /* Color del texto de las etiquetas */
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  /* Estilo para los inputs y selects */
+  .deducciones-input {
+    border-radius: 5px; /* Bordes suaves */
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    width: 100%;
+  }
+  
+  .deducciones-input:focus {
+    border-color: #3f8cfc; /* Color de borde al enfocar */
+    box-shadow: 0 0 5px rgba(63, 140, 252, 0.3); /* Efecto de sombra al hacer foco */
+  }
+  
+  /* Estilo para el botón */
+  .deducciones-button {
+    background-color: #3f8cfc;
+    border-color: #3f8cfc;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 5px; /* Bordes suaves */
+  }
+  
+  .deducciones-button:hover {
+    background-color: #2b71c4; /* Color de fondo más oscuro en hover */
+    border-color: #2b71c4;
+  }
+  
+  .deducciones-button:focus {
+    outline: none;
+  }
+  
+  /* Sombra y animación suave del modal */
+  .deducciones-modal .ant-modal {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .deducciones-modal .ant-modal-close {
+    color: #fff;
+  }
+  
+  .deducciones-modal .ant-modal-body {
+    padding: 30px;
+  }
+  

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal, Form, Input, InputNumber, message } from 'antd';
+import { Table, Button, message } from 'antd';
+import AgregarHoras from './AgregarHoras';
 import './IngresoHoras.css';
 
 const IngresoHoras = () => {
   const [horas, setHoras] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -13,7 +13,6 @@ const IngresoHoras = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    form.resetFields();
   };
 
   const handleAddHoras = (values) => {
@@ -26,7 +25,6 @@ const IngresoHoras = () => {
 
     setHoras([...horas, nuevaEntrada]);
     setIsModalVisible(false);
-    form.resetFields();
     message.success('Horas ingresadas exitosamente.');
   };
 
@@ -60,47 +58,13 @@ const IngresoHoras = () => {
         columns={columns}
         pagination={{ pageSize: 5 }}
       />
-
-      <Modal
-        title="Registrar Horas"
+      
+      {/* AgregarHoras modal */}
+      <AgregarHoras
         visible={isModalVisible}
         onCancel={handleCancel}
-        footer={null}
-      >
-        <Form form={form} layout="vertical" onFinish={handleAddHoras}>
-          <Form.Item
-            name="empleado"
-            label="Nombre del Empleado"
-            rules={[{ required: true, message: 'Por favor, ingrese el nombre del empleado.' }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="horasTrabajadas"
-            label="Horas Trabajadas"
-            rules={[
-              { required: true, message: 'Por favor, ingrese las horas trabajadas.' },
-              { type: 'number', min: 0, message: 'Ingrese un número válido.' },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-          <Form.Item
-            name="horasExtras"
-            label="Horas Extras"
-            rules={[
-              { type: 'number', min: 0, message: 'Ingrese un número válido.' },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Guardar
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+        onAddHoras={handleAddHoras}
+      />
     </div>
   );
 };
