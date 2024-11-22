@@ -1,0 +1,95 @@
+/* Contenedor general del login */
+.login-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Fondo azul oscuro */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Tarjeta del formulario */
+.login-card {
+  width: 100%;
+  max-width: 450px; /* Ancho máximo */
+  padding: 50px 40px;
+  border-radius: 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra */
+  text-align: center;
+  color: #333;
+}
+
+/* Estilos para el contenedor del título */
+.login-title {
+  text-align: center; /* Alineación centrada */
+  margin-bottom: 20px;
+}
+
+.login-title h1 {
+  font-size: 28px; /* Tamaño de fuente grande */
+  margin: 0;
+  color: #2a5298; /* Azul oscuro */
+}
+
+.login-title h2 {
+  font-size: 18px; /* Tamaño más pequeño para el subtítulo */
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Botón de login */
+.login-button {
+  width: 100%;
+  background: linear-gradient(90deg, #f093fb, #f5576c); /* Gradiente */
+  border: none;
+  height: 55px; /* Botón más grande */
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.login-button:hover {
+  background: linear-gradient(90deg, #f5576c, #f093fb); /* Gradiente inverso */
+  transform: scale(1.05); /* Zoom al pasar el cursor */
+}
+
+/* Inputs */
+.ant-input,
+.ant-input-password {
+  border-radius: 10px;
+  height: 50px;
+  font-size: 16px;
+}
+
+.ant-input::placeholder,
+.ant-input-password::placeholder {
+  color: #aaa;
+}
+
+.ant-checkbox-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  /* Asegurar que el título sea responsive y se vea bien en pantallas pequeñas */
+  .login-title h1 {
+    font-size: 24px; /* Ajuste del tamaño del título */
+  }
+
+  .login-title h2 {
+    font-size: 16px; /* Ajuste del tamaño del subtítulo */
+  }
+}

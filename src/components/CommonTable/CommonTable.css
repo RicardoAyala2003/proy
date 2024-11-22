@@ -1,0 +1,83 @@
+/* Contenedor de la tabla */
+.table-container {
+  padding: 20px;
+  background-color: #f0f5ff; /* Fondo general azul claro */
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabla */
+.ant-table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Encabezados de la tabla */
+.ant-table-thead > tr > th {
+  background-color: #1890ff; /* Azul intenso */
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  border-right: 1px solid #fff;
+}
+
+.ant-table-thead > tr > th:last-child {
+  border-right: none; /* Sin borde en la última columna */
+}
+
+/* Filas alternadas */
+.ant-table-tbody > tr:nth-child(odd) > td {
+  background-color: #e6f7ff; /* Azul claro */
+}
+
+.ant-table-tbody > tr:nth-child(even) > td {
+  background-color: #ffffff; /* Blanco */
+}
+
+/* Efecto hover en filas */
+.ant-table-tbody > tr:hover > td {
+  background-color: #bae7ff; /* Azul más claro al pasar el ratón */
+}
+
+/* Estilo de las celdas */
+.ant-table-tbody > tr > td {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  border-right: 1px solid #ddd;
+}
+
+.ant-table-tbody > tr > td:last-child {
+  border-right: none; /* Sin borde en la última columna */
+}
+
+/* Botones en las acciones */
+.ant-btn {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.ant-btn-edit {
+  background-color: #40a9ff;
+  color: white;
+  border: none;
+}
+
+.ant-btn-edit:hover {
+  background-color: #1890ff; /* Azul más intenso */
+  color: white;
+}
+
+.ant-btn-delete {
+  background-color: #ff7875;
+  color: white;
+  border: none;
+}
+
+.ant-btn-delete:hover {
+  background-color: #ff4d4f; /* Rojo más intenso */
+  color: white;
+}

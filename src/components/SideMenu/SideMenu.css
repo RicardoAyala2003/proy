@@ -1,0 +1,38 @@
+/* SideMenu.css */
+.side-menu {
+  background: #001529; /* Fondo oscuro */
+}
+
+.logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+/* Submenús */
+.ant-menu-submenu-title {
+  font-weight: bold;
+  color: white;
+}
+
+.ant-menu-submenu-title:hover {
+  color: #40a9ff; /* Azul claro al pasar el ratón */
+}
+
+.ant-menu-item-selected {
+  background-color: #1890ff !important; /* Color de selección */
+}
+
+.ant-layout-content {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
