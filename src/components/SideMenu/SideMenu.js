@@ -7,7 +7,6 @@ import {
   ScheduleOutlined,
   CalculatorOutlined,
   FileTextOutlined,
-  FileTextOutlined,
   PoweroffOutlined,
 } from '@ant-design/icons';
 import { Navigate } from 'react-router-dom';// Componente existente

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, message, Row, Col, Modal } from 'antd';
+import { Form, Input, Button, message, Modal } from 'antd';
 import './EditarUsuario.css';
 
-const { Option } = Select;
-
-const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
+const CreateEditUser = ({ usuarioData, openModal, handleCancel, mode }) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -22,144 +20,80 @@ const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
 
   return (
     <div className="registro-container">
-   
-        <Modal
-          title={mode ? "Crear Usuario":"Editar Usuario"}
-          visible={openModal}
-          onCancel={handleCancel}
-          footer={null}  // No mostrar los botones predeterminados
-          width={800}
+      <Modal
+        title={mode ? 'Crear Usuario' : 'Editar Usuario'}
+        visible={openModal}
+        onCancel={handleCancel}
+        footer={null} // No mostrar botones predeterminados
+        width={500}
+      >
+        <Form
+          name="editarUsuario"
+          initialValues={usuarioData} // Usamos los valores de usuarioData para llenar el formulario
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          size="large"
+          layout="vertical"
         >
-          <Form
-            name="editarUsuario"
-            initialValues={usuarioData} // Usamos los valores de usuarioData para llenar el formulario
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            size="large"
-            layout="vertical"
+          {/* Código de Usuario */}
+          <Form.Item
+            name="codigoUsuario"
+            label="Código de Usuario"
+            rules={[
+              {
+                required: true,
+                message: 'Por favor, ingresa un código de usuario válido!',
+              },
+              {
+                pattern: /^[A-Z]{3}-\d{6}$/,
+                message: 'El código debe tener el formato ABC-123456',
+              },
+            ]}
           >
+            <Input placeholder="Código de Usuario (ABC-123456)" />
+          </Form.Item>
 
-          <Row gutter={24}>
-            {/* Nombre */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="nombre"
-                label="Nombre"
-                rules={[{ required: true, message: 'Por favor, ingresa tu nombre!' }]}
-              >
-                <Input placeholder="Nombre" />
-              </Form.Item>
-            </Col>
+          {/* Usuario */}
+          <Form.Item
+            name="usuario"
+            label="Usuario"
+            rules={[{ required: true, message: 'Por favor, ingresa un nombre de usuario!' }]}
+          >
+            <Input placeholder="Nombre de Usuario" />
+          </Form.Item>
 
-            {/* Apellido */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="apellido"
-                label="Apellido"
-                rules={[{ required: true, message: 'Por favor, ingresa tu apellido!' }]}
-              >
-                <Input placeholder="Apellido" />
-              </Form.Item>
-            </Col>
+          {/* Contraseña */}
+          <Form.Item
+            name="contraseña"
+            label="Contraseña"
+            rules={[
+              {
+                required: true,
+                message: 'Por favor, ingresa una contraseña!',
+              },
+              {
+                min: 6,
+                message: 'La contraseña debe tener al menos 6 caracteres!',
+              },
+            ]}
+          >
+            <Input.Password placeholder="Contraseña" />
+          </Form.Item>
 
-            {/* Código de Empleado */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="codigoEmpleado"
-                label="Código de Empleado"
-                rules={[{ required: true, message: 'Por favor, ingresa un código único!' }]}
-              >
-                <Input placeholder="Código de Empleado" />
-              </Form.Item>
-            </Col>
-
-            {/* Edad */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="edad"
-                label="Edad"
-                rules={[{ required: true, message: 'Por favor, ingresa tu edad!' }]}
-              >
-                <Input type="number" placeholder="Edad (18-65)" />
-              </Form.Item>
-            </Col>
-
-            {/* Dirección */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="direccion"
-                label="Dirección"
-                rules={[{ required: true, message: 'Por favor, ingresa tu dirección!' }]}
-              >
-                <Input placeholder="Dirección" />
-              </Form.Item>
-            </Col>
-
-            {/* Rol */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="rol"
-                label="Rol"
-                rules={[{ required: true, message: 'Por favor, selecciona un rol!' }]}
-              >
-                <Select placeholder="Selecciona un rol">
-                  <Option value="Administrador">Administrador</Option>
-                  <Option value="Usuario de Planilla">Usuario de Planilla</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-
-            {/* Correo Electrónico Personal */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="correoPersonal"
-                label="Correo Electrónico Personal"
-                rules={[{ required: true, type: 'email', message: 'Por favor, ingresa un correo válido!' }]}
-              >
-                <Input placeholder="Correo Electrónico Personal" />
-              </Form.Item>
-            </Col>
-
-            {/* Correo Electrónico Empresarial */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="correoEmpresarial"
-                label="Correo Electrónico Empresarial"
-                rules={[{ type: 'email', message: 'Por favor, ingresa un correo empresarial válido!' }]}
-              >
-                <Input placeholder="Correo Electrónico Empresarial (opcional)" />
-              </Form.Item>
-            </Col>
-
-            {/* Tipo de Salario */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="tipoSalario"
-                label="Tipo de Salario"
-                rules={[{ required: true, message: 'Por favor, selecciona un tipo de salario!' }]}
-              >
-                <Select placeholder="Selecciona">
-                  <Option value="Mensual">Mensual</Option>
-                  <Option value="Por Hora">Por Hora</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-
-            {/* Medio de Pago */}
-            <Col xs={24} sm={12}>
-              <Form.Item
-                name="medioPago"
-                label="Medio de Pago"
-                rules={[{ required: true, message: 'Por favor, selecciona un medio de pago!' }]}
-              >
-                <Select placeholder="Selecciona">
-                  <Option value="Banco">Banco</Option>
-                  <Option value="Transferencia Internacional">Transferencia Internacional</Option>
-                  <Option value="Plataforma Internacional">Plataforma Internacional</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
+          {/* Correo Electrónico */}
+          <Form.Item
+            name="correo"
+            label="Correo Electrónico"
+            rules={[
+              {
+                required: true,
+                type: 'email',
+                message: 'Por favor, ingresa un correo válido!',
+              },
+            ]}
+          >
+            <Input placeholder="Correo Electrónico" />
+          </Form.Item>
 
           {/* Botón de Submit */}
           <Form.Item>
@@ -169,14 +103,13 @@ const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
               loading={loading}
               className="registro-button"
             >
-              {mode ? "Crear Usuario":"Editar Usuario"}
+              {mode ? 'Crear Usuario' : 'Editar Usuario'}
             </Button>
           </Form.Item>
-
-          </Form>
-        </Modal>
+        </Form>
+      </Modal>
     </div>
   );
-}
+};
 
 export default CreateEditUser;
