@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, Button, message } from 'antd';
 import './Deducciones.css';
 import AgregarDeducciones from './AgregarDeducciones'; // Importamos el componente de AgregarDeducciones
+import CommonTable from '../CommonTable/CommonTable';
 
 const Deducciones = () => {
   const [deducciones, setDeducciones] = useState([]);
@@ -38,9 +39,14 @@ const Deducciones = () => {
       key: 'nombre',
     },
     {
-      title: 'Frecuencia',
-      dataIndex: 'frecuencia',
+      title: 'Fecha de Inicio',
+      dataIndex: 'startDale',
       key: 'frecuencia',
+    },
+    {
+      title: 'Fecha de final',
+      dataIndex: 'endDate',
+      key: 'endDate',
     },
     {
       title: 'Monto',
@@ -56,14 +62,10 @@ const Deducciones = () => {
         Agregar Deducción
       </Button>
 
-      <Table
-        style={{ marginTop: '20px' }}
-        dataSource={deducciones}
+      <CommonTable
         columns={columns}
-        pagination={{ pageSize: 5 }}
       />
 
-      {/* Aquí usamos el componente AgregarDeducciones */}
       <AgregarDeducciones 
         visible={isModalVisible}
         onCancel={handleCancel}
