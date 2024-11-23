@@ -9,7 +9,7 @@ import {
   FileTextOutlined,
   PoweroffOutlined,
 } from '@ant-design/icons';
-import { Navigate } from 'react-router-dom';// Componente existente
+import { Navigate } from 'react-router-dom'; // Componente existente
 import Deducciones from '../Deducciones/Deducciones'; // Componente existente
 import IngresoHoras from '../IngresoHoras/IngresoHoras'; // Componente existente
 import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente existente
@@ -48,7 +48,7 @@ const SideMenu = () => {
     switch (selectedKey) {
       case 'gestion-usuarios': // Mostrar el formulario directamente
         return <Users />;
-        case 'gestion-empleados': 
+      case 'gestion-empleados': 
         return <Empleados />;
       case 'deducciones':
         return <Deducciones />;
@@ -72,7 +72,7 @@ const SideMenu = () => {
     <Layout style={{ minHeight: '100vh' }}>
       <Sider collapsible className="side-menu">
         <div className="logo">
-          <h1 style={{ color: 'white', textAlign: 'center', padding: '10px' }}>Menú</h1>
+          <img src="/logo.png" alt="Logo" className="logo-img" />
         </div>
         <Menu
           theme="dark"
@@ -121,4 +121,4 @@ const SideMenu = () => {
   );
 };
 
-export default SideMenu;//
+export default SideMenu;

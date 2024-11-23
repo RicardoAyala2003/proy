@@ -1,21 +1,21 @@
-/* SideMenu.css */
+/* Menú lateral */
 .side-menu {
   background: #001529; /* Fondo oscuro */
 }
 
+/* Logo en la parte superior */
 .logo {
-  height: 64px;
+  height: 90px; /* Ajusta el tamaño del contenedor del logo */
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  background-color: #002140; /* Fondo ligeramente más oscuro */
 }
 
-.logo h1 {
-  margin: 0;
+.logo-img {
+  max-height: 80%; /* Ajusta la altura máxima del logo */
+  max-width: 90%; /* Asegura que el logo se ajuste al contenedor */
+  object-fit: contain; /* Evita distorsión del logo */
 }
 
 /* Submenús */

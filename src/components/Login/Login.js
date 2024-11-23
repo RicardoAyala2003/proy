@@ -33,9 +33,7 @@ function Login() {
       <Card
         title={
           <div className="login-title">
-            <img src={logo} alt="Logo del sistema" className="login-logo" /> {/* Logo agregado */}
-            <h1>MÓDULO DE PLANILLAS</h1>
-            <h2>Inicio de Sesión</h2>
+            <img src={logo} alt="Logo del sistema" className="login-logo" /> {/* Solo el logo */}
           </div>
         }
         bordered={false}

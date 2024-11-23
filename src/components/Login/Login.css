@@ -21,29 +21,11 @@
   color: #333;
 }
 
-/* Estilos para el contenedor del título */
-.login-title {
-  text-align: center; /* Alineación centrada */
-  margin-bottom: 20px;
-}
-
-.login-title h1 {
-  font-size: 28px; /* Tamaño de fuente grande */
-  margin: 0;
-  color: #2a5298; /* Azul oscuro */
-}
-
-.login-title h2 {
-  font-size: 18px; /* Tamaño más pequeño para el subtítulo */
-  color: #555;
-  margin-top: 10px;
-}
-
 /* Estilos para el logo */
 .login-logo {
-  width: 100px; /* Ancho del logo */
+  width: 200px; /* Tamaño aumentado del logo */
   height: auto; /* Mantener proporción */
-  margin-bottom: 20px; /* Separación con el título */
+  margin-bottom: 20px; /* Separación con el formulario */
 }
 
 /* Botón de login */
@@ -89,13 +71,5 @@
   .login-card {
     max-width: 90%;
     padding: 30px;
-  }
-
-  .login-title h1 {
-    font-size: 24px; /* Ajuste del tamaño del título */
-  }
-
-  .login-title h2 {
-    font-size: 16px; /* Ajuste del tamaño del subtítulo */
   }
 }
