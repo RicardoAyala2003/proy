@@ -3,10 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 import Login from './components/Login/Login'; // Importamos el componente de Login
 import SideMenu from './components/SideMenu/SideMenu'; // Importamos el SideMenu
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store, persistor } from './store/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
+
 function App() {
+
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

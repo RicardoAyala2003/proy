@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import CommonTable from '../CommonTable/CommonTable';
 import { Button, Space } from 'antd';
-import CreateEditUser from '../EditarUsuario/EditarUsuario';
+import CreateEditEmpleado from '../EditarEmpleado/EditarEmpleados';
 
 const Users = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -96,7 +96,7 @@ const Users = () => {
     ];
     return (
         <div>
-        <h1> Usuarios </h1>
+        <h1> Empleados </h1>
         <Button
             onClick={()=>{
                 setOpenModal(true);
@@ -104,13 +104,13 @@ const Users = () => {
             }}
             type="primary"
         >
-            Agregar Usuarios
+            Agregar Empleados
         </Button>
             <CommonTable 
                 columns={columns2} 
                 dataSource={data2}    
             />
-            <CreateEditUser mode={mode} openModal={openModal} handleCancel={() => {setOpenModal(false);}} />
+            <CreateEditEmpleado mode={mode} openModal={openModal} handleCancel={() => {setOpenModal(false);}} />
         </div>
     );
 };
