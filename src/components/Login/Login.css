@@ -39,6 +39,13 @@
   margin-top: 10px;
 }
 
+/* Estilos para el logo */
+.login-logo {
+  width: 100px; /* Ancho del logo */
+  height: auto; /* Mantener proporción */
+  margin-bottom: 20px; /* Separación con el título */
+}
+
 /* Botón de login */
 .login-button {
   width: 100%;
@@ -84,7 +91,6 @@
     padding: 30px;
   }
 
-  /* Asegurar que el título sea responsive y se vea bien en pantallas pequeñas */
   .login-title h1 {
     font-size: 24px; /* Ajuste del tamaño del título */
   }

@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
-import { useNavigate } from 'react-router-dom'; // Hook para redirigir
-import './Login.css';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './Login.css';
+import logo from './logo.png'; // Importa el logo
 
 function Login() {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Hook para redirigir
-  const user =  useSelector((state) => state.account.userActive);
-  if (user !== undefined  &&  user?.status === true) {
-    //axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${user.jwtToken ? user?.jwtToken : ''}`;
-  }
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.account.userActive);
+
   const onFinish = (values) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       if (values.username === 'admin' && values.password === '1234') {
         message.success('Inicio de sesión exitoso!');
-        navigate('/dashboard'); // Redirige al SideMenu
+        navigate('/dashboard');
       } else {
         message.error('Usuario o contraseña inválidos!');
       }
@@ -34,6 +33,7 @@ function Login() {
       <Card
         title={
           <div className="login-title">
+            <img src={logo} alt="Logo del sistema" className="login-logo" /> {/* Logo agregado */}
             <h1>MÓDULO DE PLANILLAS</h1>
             <h2>Inicio de Sesión</h2>
           </div>
@@ -43,9 +43,7 @@ function Login() {
       >
         <Form
           name="login"
-          initialValues={{
-            remember: true,
-          }}
+          initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           size="large"
@@ -56,18 +54,15 @@ function Login() {
           >
             <Input placeholder="Usuario" />
           </Form.Item>
-
           <Form.Item
             name="password"
             rules={[{ required: true, message: 'Por favor ingresa tu contraseña!' }]}
           >
             <Input.Password placeholder="Contraseña" />
           </Form.Item>
-
           <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Recuérdame</Checkbox>
           </Form.Item>
-
           <Form.Item>
             <Button
               type="primary"
