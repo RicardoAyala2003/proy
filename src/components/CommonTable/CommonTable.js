@@ -1,9 +1,8 @@
-// CommonTable.js
 import React from 'react';
 import { Table } from 'antd';
-import './CommonTable.css'; // Estilos con los colores azules
+import './CommonTable.css';
 
-const CommonTable = ({columns, dataSource}) => {
+const CommonTable = ({ columns, dataSource }) => {
   console.log(columns);
   console.log(dataSource);
 

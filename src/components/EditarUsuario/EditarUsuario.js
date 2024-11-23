@@ -4,7 +4,7 @@ import './EditarUsuario.css';
 
 const { Option } = Select;
 
-function EditarUsuario({usuarioData, openModal, handleCancel}) {
+const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -22,14 +22,9 @@ function EditarUsuario({usuarioData, openModal, handleCancel}) {
 
   return (
     <div className="registro-container">
-      <Card
-        title={<h1> Editar Usuario</h1>}
-        bordered={false}
-        className="registro-card"
-      >
    
         <Modal
-          title="Editar Usuario"
+          title={mode ? "Crear Usuario":"Editar Usuario"}
           visible={openModal}
           onCancel={handleCancel}
           footer={null}  // No mostrar los botones predeterminados
@@ -174,16 +169,14 @@ function EditarUsuario({usuarioData, openModal, handleCancel}) {
               loading={loading}
               className="registro-button"
             >
-              Editar
+              {mode ? "Crear Usuario":"Editar Usuario"}
             </Button>
           </Form.Item>
 
           </Form>
         </Modal>
-          
-      </Card>
     </div>
   );
 }
 
-export default EditarUsuario;
+export default CreateEditUser;

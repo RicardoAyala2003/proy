@@ -1,12 +1,13 @@
 // users.js
 import React, { useState } from 'react';
-import EditarUsuario from '../EditarUsuario/EditarUsuario';
 import CommonTable from '../CommonTable/CommonTable';
 import { Button, Space } from 'antd';
+import CreateEditUser from '../EditarUsuario/EditarUsuario';
 
 const Users = () => {
-    const [currentUser, setCurrentUser] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [mode, setMode] = useState(false);
+    
 
     const data2 = [
         {
@@ -76,13 +77,16 @@ const Users = () => {
             <Space size="middle">
               <Button
                 className="ant-btn-edit"
-                onClick={() => setOpenModal(true)}
+                onClick={() => {
+                    setOpenModal(true);
+                    setMode(false)
+                }}
               >
                 Editar
               </Button>
               <Button
                 className="ant-btn-delete"
-                onClick={() => handleDelete(record.key)}
+                //onClick={() => handleDelete(record.key)}
               >
                 Eliminar
               </Button>
@@ -90,11 +94,23 @@ const Users = () => {
           ),
         },
     ];
-
     return (
         <div>
-            <CommonTable columns={columns2} dataSource={data2} />
-            <EditarUsuario openModal={openModal} handleCancel={() => setOpenModal(false)} />
+        <h1> Usuarios </h1>
+        <Button
+            onClick={()=>{
+                setOpenModal(true);
+                setMode(true);
+            }}
+            type="primary"
+        >
+            Agregar Usuarios
+        </Button>
+            <CommonTable 
+                columns={columns2} 
+                dataSource={data2}    
+            />
+            <CreateEditUser mode={mode} openModal={openModal} handleCancel={() => {setOpenModal(false);}} />
         </div>
     );
 };

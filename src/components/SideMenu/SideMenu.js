@@ -9,15 +9,14 @@ import {
   FileTextOutlined, // Icono para Reporte y Pago
   PoweroffOutlined,
 } from '@ant-design/icons';
-import { Navigate } from 'react-router-dom';
-import CommonTable from '../CommonTable/CommonTable'; // Componente existente
-import Registro from '../Registro/Registro'; // Componente existente
+import { Navigate } from 'react-router-dom';// Componente existente
 import Deducciones from '../Deducciones/Deducciones'; // Componente existente
 import IngresoHoras from '../IngresoHoras/IngresoHoras'; // Componente existente
 import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente existente
 import ListaPlanillas from '../ListaPlanillas/ListaPlanillas'; // Nuevo componente
 import ReportePago from '../ReportePago/ReportePago'; // Componente único para Reporte y Pago
 import './SideMenu.css';
+import Users from '../features/users';
 
 const { Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -41,11 +40,7 @@ const SideMenu = () => {
   const renderContent = () => {
     switch (selectedKey) {
       case 'crear-usuarios':
-        return <Registro />;
-      case 'gestionar-usuarios':
-        return <CommonTable />;
-      case 'gestion-empleados':
-        return <CommonTable />;
+        return <Users />;
       case 'deducciones':
         return <Deducciones />;
       case 'ingreso-horas':
