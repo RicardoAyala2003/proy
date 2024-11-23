@@ -6,10 +6,10 @@ import {
   SettingOutlined,
   ScheduleOutlined,
   CalculatorOutlined,
-  FileTextOutlined, // Icono para Reporte y Pago
+  FileTextOutlined,
   PoweroffOutlined,
 } from '@ant-design/icons';
-import { Navigate } from 'react-router-dom';// Componente existente
+import { Navigate } from 'react-router-dom'; // Componente existente
 import Deducciones from '../Deducciones/Deducciones'; // Componente existente
 import IngresoHoras from '../IngresoHoras/IngresoHoras'; // Componente existente
 import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente existente
@@ -17,9 +17,9 @@ import ListaPlanillas from '../ListaPlanillas/ListaPlanillas'; // Nuevo componen
 import ReportePago from '../ReportePago/ReportePago'; // Componente único para Reporte y Pago
 import './SideMenu.css';
 import Users from '../features/users';
+import Empleados from '../features/empleados';
 
 const { Sider, Content } = Layout;
-const { SubMenu } = Menu;
 
 const SideMenu = () => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
@@ -39,8 +39,10 @@ const SideMenu = () => {
 
   const renderContent = () => {
     switch (selectedKey) {
-      case 'crear-usuarios':
+      case 'gestion-usuarios': // Mostrar el formulario directamente
         return <Users />;
+        case 'gestion-empleados': 
+        return <Empleados />;
       case 'deducciones':
         return <Deducciones />;
       case 'ingreso-horas':
@@ -49,8 +51,8 @@ const SideMenu = () => {
         return <CicloPlanillas />;
       case 'lista-planillas':
         return <ListaPlanillas />;
-      case 'reporte-pago': // Nueva opción única
-        return <ReportePago />; // Componente único para Reporte y Pago
+      case 'reporte-pago':
+        return <ReportePago />;
       default:
         return (
           <div>
@@ -73,10 +75,9 @@ const SideMenu = () => {
           defaultSelectedKeys={['1']}
           onClick={(item) => handleMenuClick(item.key)}
         >
-          <SubMenu key="gestion-usuarios" icon={<UserOutlined />} title="Gestión de Usuarios">
-            <Menu.Item key="crear-usuarios">Crear Usuarios</Menu.Item>
-            <Menu.Item key="gestionar-usuarios">Gestionar Usuarios</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="gestion-usuarios" icon={<UserOutlined />}>
+            Gestión de Usuarios
+          </Menu.Item>
           <Menu.Item key="gestion-empleados" icon={<TeamOutlined />}>
             Gestión de Empleados
           </Menu.Item>
@@ -86,10 +87,10 @@ const SideMenu = () => {
           <Menu.Item key="ingreso-horas" icon={<ScheduleOutlined />}>
             Ingreso de Horas
           </Menu.Item>
-          <SubMenu key="planillas" icon={<CalculatorOutlined />} title="Planillas">
+          <Menu.SubMenu key="planillas" icon={<CalculatorOutlined />} title="Planillas">
             <Menu.Item key="ciclo-planillas">Ciclo de Planillas</Menu.Item>
             <Menu.Item key="lista-planillas">Lista de Planillas</Menu.Item>
-          </SubMenu>
+          </Menu.SubMenu>
           <Menu.Item key="reporte-pago" icon={<FileTextOutlined />}>
             Reporte y Pago
           </Menu.Item>

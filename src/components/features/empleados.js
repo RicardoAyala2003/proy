@@ -96,7 +96,7 @@ const Users = () => {
     ];
     return (
         <div>
-        <h1> Usuarios </h1>
+        <h1> Empleados </h1>
         <Button
             onClick={()=>{
                 setOpenModal(true);
@@ -104,7 +104,7 @@ const Users = () => {
             }}
             type="primary"
         >
-            Agregar Usuarios
+            Agregar Empleados
         </Button>
             <CommonTable 
                 columns={columns2} 
