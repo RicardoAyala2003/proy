@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import { useNavigate } from 'react-router-dom'; // Hook para redirigir
 import './Login.css';
+import { useSelector } from 'react-redux';
 
 function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); // Hook para redirigir
-
+  const user =  useSelector((state) => state.account.userActive);
+  if (user !== undefined  &&  user?.status === true) {
+    //axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${user.jwtToken ? user?.jwtToken : ''}`;
+  }
   const onFinish = (values) => {
     setLoading(true);
     setTimeout(() => {
