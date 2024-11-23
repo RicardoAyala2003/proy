@@ -1,16 +1,32 @@
-import React from 'react';
-import { Modal, Form, Input, Select, Button } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Form, Input, Select, Button, DatePicker, InputNumber } from 'antd';
 import './AgregarDeducciones.css'; // Añadimos un archivo de estilos personalizado
+const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 const AgregarDeducciones = ({ visible, onCancel, onAddDeduccion }) => {
 
   const [form] = Form.useForm();
+  const [isEndDateDisabled, setIsEndDateDisabled] = useState(true); 
 
   const handleSubmit = (values) => {
     onAddDeduccion(values);
     form.resetFields();
   };
+  const disabledDate = (current) => {
+    return current && current.date() !== 15 && current.date() !== 30;
+  };
+
+  const validateEndDate = (_, value) => {
+    const startDate = form.getFieldValue('startDate');
+    if (value && startDate && (value.isBefore(startDate, 'day') || value.isSame(startDate, 'day'))) {
+      return Promise.reject('La fecha final debe ser posterior a la fecha de inicio.');
+    }
+    return Promise.resolve();
+  };
+  const handleStartDateChange = (value) => {
+    setIsEndDateDisabled(!value);
+  }
 
   return (
     <Modal
@@ -33,14 +49,31 @@ const AgregarDeducciones = ({ visible, onCancel, onAddDeduccion }) => {
         </Form.Item>
 
         <Form.Item
-          name="frecuencia"
-          label="Frecuencia"
-          rules={[{ required: true, message: 'Por favor, seleccione la frecuencia.' }]}
+          name="startDate"
+          label="Fecha de Inicio"
+          rules={[{ 
+            required: true,
+            message: 'Seleccione una fecha de inicio.' 
+          }]}
         >
-          <Select placeholder="Seleccione una frecuencia" className="deducciones-input">
-            <Option value="Mensual">Mensual</Option>
-            <Option value="Quincenal">Quincenal</Option>
-          </Select>
+          <DatePicker
+            disabledDate={disabledDate}
+            format="DD/MM/YYYY"
+            onChange={handleStartDateChange}
+          />
+        </Form.Item>
+        <Form.Item
+          name="endDate"
+          label="Fecha de Final"
+          rules={[
+            { validator: validateEndDate } // Validación personalizada para fecha final
+          ]}
+        >
+          <DatePicker
+            disabledDate={disabledDate}
+            format="DD/MM/YYYY"
+            disabled={isEndDateDisabled} 
+          />
         </Form.Item>
 
         <Form.Item
@@ -51,7 +84,11 @@ const AgregarDeducciones = ({ visible, onCancel, onAddDeduccion }) => {
             { pattern: /^[0-9]+$/, message: 'Solo se permiten números.' },
           ]}
         >
-          <Input placeholder="Ej: 200" className="deducciones-input" />
+          <InputNumber
+            defaultValue={0}
+            formatter={(value) => `L ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            parser={(value) => value?.replace(/\$\s?|(,*)/g, '')}
+          />
         </Form.Item>
 
         <Form.Item>
