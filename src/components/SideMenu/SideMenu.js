@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button } from 'antd';
 import {
   UserOutlined,
   TeamOutlined,
   SettingOutlined,
   ScheduleOutlined,
   CalculatorOutlined,
-  FileTextOutlined, // Icono para Reporte y Pago
+  FileTextOutlined,
   PoweroffOutlined,
 } from '@ant-design/icons';
-import { Navigate } from 'react-router-dom';// Componente existente
-import Deducciones from '../Deducciones/Deducciones'; // Componente existente
-import IngresoHoras from '../IngresoHoras/IngresoHoras'; // Componente existente
-import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente existente
-import ListaPlanillas from '../ListaPlanillas/ListaPlanillas'; // Nuevo componente
-import ReportePago from '../ReportePago/ReportePago'; // Componente único para Reporte y Pago
+import { Navigate } from 'react-router-dom';
+import Deducciones from '../Deducciones/Deducciones';
+import IngresoHoras from '../IngresoHoras/IngresoHoras';
+import CicloPlanillas from '../CicloPlanillas/CicloPlanillas'; // Componente de modal
+import ListaPlanillas from '../ListaPlanillas/ListaPlanillas';
+import ReportePago from '../ReportePago/ReportePago';
 import './SideMenu.css';
 import Users from '../features/users';
 
@@ -24,13 +24,20 @@ const { SubMenu } = Menu;
 const SideMenu = () => {
   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [selectedKey, setSelectedKey] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false); // Estado para controlar el modal
 
   const handleMenuClick = (menuKey) => {
     if (menuKey === 'logout') {
       setIsLoggedOut(true);
+    } else if (menuKey === 'ciclo-planillas') {
+      setIsModalVisible(true); // Mostrar modal al seleccionar "Ciclo de Planillas"
     } else {
       setSelectedKey(menuKey);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false); // Cerrar el modal
   };
 
   if (isLoggedOut) {
@@ -45,12 +52,10 @@ const SideMenu = () => {
         return <Deducciones />;
       case 'ingreso-horas':
         return <IngresoHoras />;
-      case 'ciclo-planillas':
-        return <CicloPlanillas />;
       case 'lista-planillas':
         return <ListaPlanillas />;
-      case 'reporte-pago': // Nueva opción única
-        return <ReportePago />; // Componente único para Reporte y Pago
+      case 'reporte-pago':
+        return <ReportePago />;
       default:
         return (
           <div>
@@ -107,6 +112,9 @@ const SideMenu = () => {
         }}
       >
         {renderContent()}
+
+        {/* Modal para Ciclo de Planillas */}
+        <CicloPlanillas visible={isModalVisible} onClose={closeModal} />
       </Content>
     </Layout>
   );

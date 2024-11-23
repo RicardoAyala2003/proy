@@ -6,6 +6,18 @@
   background-color: #f4f6f8;
   padding: 20px; /* Agrega un poco de espacio alrededor */
 }
+.ant-modal {
+  max-width: 500px;
+}
+
+.ant-modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 10px;
+}
 
 .ciclo-planillas-card {
   width: 600px; /* Hacemos el formulario más ancho */

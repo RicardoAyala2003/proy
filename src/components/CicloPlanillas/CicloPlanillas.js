@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { Form, Select, Input, Button, Card, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Select, Input, Button, Modal, message } from 'antd';
 import './CicloPlanillas.css';
 
 const { Option } = Select;
 
-const CicloPlanillas = () => {
+const CicloPlanillas = ({ visible, onClose, planilla }) => { // <-- Asegúrate de recibir las props aquí
+  const [form] = Form.useForm(); // <-- Hook para manejar el formulario
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (planilla) {
+      form.setFieldsValue(planilla); // Rellena los valores si se pasa una planilla
+    } else {
+      form.resetFields(); // Limpia los valores si es un nuevo ciclo
+    }
+  }, [planilla, form]);
 
   const onFinish = (values) => {
     setLoading(true);
@@ -13,6 +22,7 @@ const CicloPlanillas = () => {
       setLoading(false);
       message.success('Ciclo de planilla configurado correctamente.');
       console.log('Datos enviados:', values);
+      onClose(); // Cierra el modal
     }, 1000);
   };
 
@@ -22,48 +32,64 @@ const CicloPlanillas = () => {
   };
 
   return (
-    <div className="ciclo-planillas-container">
-      <Card
-        title={<h2>Configuración de Ciclo de Planillas</h2>}
-        className="ciclo-planillas-card"
+    <Modal
+      title={planilla ? 'Editar Ciclo de Planilla' : 'Agregar Ciclo de Planilla'}
+      visible={visible} // <-- Prop para mostrar/ocultar el modal
+      onCancel={onClose} // <-- Prop para cerrar el modal
+      footer={null}
+    >
+      <Form
+        form={form} // Asocia el formulario al hook `useForm`
+        name="cicloPlanillas"
+        layout="vertical"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
-        <Form
-          name="cicloPlanillas"
-          layout="vertical"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+        <Form.Item
+          name="tipoCiclo"
+          label="Tipo de Ciclo"
+          rules={[{ required: true, message: 'Selecciona el tipo de ciclo.' }]}
         >
-          <Form.Item
-            name="tipoCiclo"
-            label="Tipo de Ciclo"
-            rules={[{ required: true, message: 'Selecciona el tipo de ciclo.' }]}
-          >
-            <Select placeholder="Selecciona el ciclo de planilla">
-              <Option value="mensual">Mensual</Option>
-              <Option value="quincenal">Quincenal</Option>
-              <Option value="semanal">Semanal</Option>
-            </Select>
-          </Form.Item>
+          <Select placeholder="Selecciona el ciclo de planilla">
+            <Option value="Mensual">Mensual</Option>
+            <Option value="Quincenal">Quincenal</Option>
+          </Select>
+        </Form.Item>
 
-          <Form.Item
-            name="diaCorte"
-            label="Día de Corte"
-            rules={[
-              { required: true, message: 'Ingresa el día de corte de planilla.' },
-              { pattern: /^[0-9]+$/, message: 'Debe ser un número válido.' },
-            ]}
-          >
-            <Input placeholder="Por ejemplo: 15 para quincenal o 30 para mensual" />
-          </Form.Item>
+        <Form.Item
+          name="fechaInicio"
+          label="Fecha de Inicio"
+          rules={[{ required: true, message: 'Selecciona la fecha de inicio.' }]}
+        >
+          <Input type="date" />
+        </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} block>
-              Guardar Configuración
-            </Button>
-          </Form.Item>
-        </Form>
-      </Card>
-    </div>
+        <Form.Item
+          name="fechaFin"
+          label="Fecha de Fin"
+          rules={[{ required: true, message: 'Selecciona la fecha de fin.' }]}
+        >
+          <Input type="date" />
+        </Form.Item>
+
+        <Form.Item
+          name="estado"
+          label="Estado"
+          rules={[{ required: true, message: 'Selecciona el estado.' }]}
+        >
+          <Select placeholder="Selecciona el estado">
+            <Option value="Pendiente">Pendiente</Option>
+            <Option value="Aprobada">Aprobada</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" loading={loading} block>
+            Guardar Configuración
+          </Button>
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };
 
