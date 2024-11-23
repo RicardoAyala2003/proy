@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import CommonTable from '../CommonTable/CommonTable';
 import { Button, Space } from 'antd';
-import CreateEditUser from '../EditarUsuario/EditarUsuario';
+import CreateEditEmpleado from '../EditarEmpleado/EditarEmpleados';
 
 const Users = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -110,7 +110,7 @@ const Users = () => {
                 columns={columns2} 
                 dataSource={data2}    
             />
-            <CreateEditUser mode={mode} openModal={openModal} handleCancel={() => {setOpenModal(false);}} />
+            <CreateEditEmpleado mode={mode} openModal={openModal} handleCancel={() => {setOpenModal(false);}} />
         </div>
     );
 };
