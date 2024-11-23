@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, message, Row, Col, Modal } from 'antd';
-import './EditarUsuario.css';
+import { Form, Input, Button, Select, Card, message, Row, Col, Modal } from 'antd';
+import './EditarEmpleados.css';
 
 const { Option } = Select;
 
-const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
+const CreateEditEmpleado = ({usuarioData, openModal, handleCancel, mode}) => {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -24,14 +24,14 @@ const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
     <div className="registro-container">
    
         <Modal
-          title={mode ? "Crear Usuario":"Editar Usuario"}
+          title={mode ? "Crear Empleado":"Editar Empleado"}
           visible={openModal}
           onCancel={handleCancel}
           footer={null}  // No mostrar los botones predeterminados
           width={800}
         >
           <Form
-            name="editarUsuario"
+            name="editarEmpleado"
             initialValues={usuarioData} // Usamos los valores de usuarioData para llenar el formulario
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -169,7 +169,7 @@ const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
               loading={loading}
               className="registro-button"
             >
-              {mode ? "Crear Usuario":"Editar Usuario"}
+              {mode ? "Crear Empleado":"Editar Empleado"}
             </Button>
           </Form.Item>
 
@@ -179,4 +179,4 @@ const CreateEditUser = ({usuarioData, openModal, handleCancel, mode}) => {
   );
 }
 
-export default CreateEditUser;
+export default CreateEditEmpleado;
