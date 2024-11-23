@@ -88,7 +88,7 @@ const Users = () => {
                 className="ant-btn-delete"
                 //onClick={() => handleDelete(record.key)}
               >
-                Eliminar
+                Desactivar
               </Button>
             </Space>
           ),
