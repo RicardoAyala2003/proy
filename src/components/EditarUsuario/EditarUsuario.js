@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, Card, message, Row, Col } from 'antd';
+import { Form, Input, Button, Select, Card, message, Row, Col, Modal } from 'antd';
 import './EditarUsuario.css';
 
 const { Option } = Select;
 
-function EditarUsuario({ usuarioData }) {
+function EditarUsuario({usuarioData, openModal, handleCancel}) {
   const [loading, setLoading] = useState(false);
 
   const onFinish = (values) => {
@@ -12,7 +12,6 @@ function EditarUsuario({ usuarioData }) {
     setTimeout(() => {
       setLoading(false);
       message.success('Datos editados exitosamente!');
-      console.log('Valores editados:', values); // Aquí puedes ver todos los datos editados
     }, 1000);
   };
 
@@ -28,14 +27,23 @@ function EditarUsuario({ usuarioData }) {
         bordered={false}
         className="registro-card"
       >
-        <Form
-          name="editarUsuario"
-          initialValues={usuarioData} // Usamos los valores de usuarioData para llenar el formulario
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          size="large"
-          layout="vertical"
+   
+        <Modal
+          title="Editar Usuario"
+          visible={openModal}
+          onCancel={handleCancel}
+          footer={null}  // No mostrar los botones predeterminados
+          width={800}
         >
+          <Form
+            name="editarUsuario"
+            initialValues={usuarioData} // Usamos los valores de usuarioData para llenar el formulario
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            size="large"
+            layout="vertical"
+          >
+
           <Row gutter={24}>
             {/* Nombre */}
             <Col xs={24} sm={12}>
@@ -169,7 +177,10 @@ function EditarUsuario({ usuarioData }) {
               Editar
             </Button>
           </Form.Item>
-        </Form>
+
+          </Form>
+        </Modal>
+          
       </Card>
     </div>
   );
