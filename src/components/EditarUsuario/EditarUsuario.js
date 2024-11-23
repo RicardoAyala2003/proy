@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, Card, message, Row, Col, Modal } from 'antd';
+import { Form, Input, Button, Select, message, Row, Col, Modal } from 'antd';
 import './EditarUsuario.css';
 
 const { Option } = Select;
